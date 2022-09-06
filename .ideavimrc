@@ -1,0 +1,24 @@
+""" The Leader Key
+let mapleader=" "
+
+set nu rnu
+set clipboard+=unnamed
+set clipboard+=ideaput
+set incsearch
+
+nnoremap \e :e ~/.ideavimrc<CR>
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
+
+""" Test running
+nnoremap <leader>t :action Run
+
+
+"""" Tab navigation
+nnoremap <TAB> :action NextTab<CR>
+nnoremap <s-TAB> :action PreviousTab<CR>
+nnoremap <s-k> :action NextTab<CR>
+nnoremap <s-j> :action PreviousTab<CR>
+
+""" Code navigation
+nnoremap <leader>d :action GotoImplementation<CR>
+

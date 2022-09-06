@@ -1,0 +1,27 @@
+fd() {
+  DIR=`find * -type d -print 2> /dev/null | fzf-tmux` \
+    && cd "$DIR"
+}
+
+vimf() {
+    vim $(fzf)
+}
+
+vimfg() {
+  vim $(git ls-tree -r HEAD --name-only | fzf)
+}
+
+cdf() {
+  DIR=$(\ls "$PROJECT_DIR" | fzf);
+  cd "$PROJECT_DIR"/"$DIR";
+}
+
+gprune() {
+  git remote prune origin;
+  git branch -v | awk '$3 == "[gone]" { print $1 }' | xargs git branch -D;
+}
+
+gprf() {
+  id="$(gh pr list -A jacarms | fzf | cut -f1)";
+  [ -n "$id" ] && gh pr checkout "$id";
+}

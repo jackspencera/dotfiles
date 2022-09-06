@@ -1,0 +1,83 @@
+# Dotfile Management
+alias config='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+alias ls="ls -lh"
+alias ..="cd .."
+
+alias grep='grep -n --color'
+alias bell="say ring"
+alias beep="say beep"
+
+function mkcdir() {
+    command mkdir -p "$@" && command cd -P "$@";
+}
+
+alias sh="zsh"
+
+# Git aliases
+alias gs="git status"
+alias ga="git add -u"
+alias gc="git commit -m"
+alias gf="git fetch"
+alias gp="git push"
+alias gpn="git rev-parse --abbrev-ref HEAD | xargs git push --set-upstream origin "
+alias gpf="git push -f"
+alias gnew="git checkout -b"
+alias glog="git log origin/green"
+alias mlog="git log origin/green"
+alias pull="git pull"
+alias gd="git diff"
+alias gds="git diff --staging"
+alias grevert="git reset --hard"
+alias gcf="git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git checkout"
+alias squashf="git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git rebase -i --autosquash"
+alias gdelete="git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git branch -d"
+alias gdeletef="git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git branch -D"
+alias rebase="git rebase green"
+alias green="git checkout green && git pull"
+alias master="git checkout master && git pull"
+alias gmerge="git fetch origin green:green && git merge origin/green"
+alias mmerge="git fetch; git merge origin/master"
+alias grbprev="git rebase @{-1}"
+alias gprev="git checkout -"
+alias gst="git stash"
+alias glast="git diff HEAD~1 HEAD"
+alias gsyncb="git pr-train -rpf"
+alias gabort="git rebase --abort"
+alias gfix="git commit -a --fixup HEAD"
+alias gcont="git rebase --continue"
+alias gpick="git cherry-pick"
+
+alias rocket="gh pr comment -b \":rocket:[canva-check-merge]\""
+alias rocketm="gh pr comment -b \":rocket:[canva-merge-pr]\""
+
+alias prc="gh pr create --web"
+alias prv="gh pr view --web"
+
+alias localstack="backends/bin/start.sh --localstack"
+alias build_backends='~/work/canva/tools/sde/build.sh backends'
+alias run_backends='sde run backends/bin/start.sh'
+alias bls='./tools/sde/build.sh localstack'
+alias rls='./backends/bin/start.sh --localstack'
+alias ils='./production/local/bin/init_local_stack.sh'
+alias btest='./tools/sde/build.sh backends --include campaign_worker && ./backends/bin/start.sh --include campaign_worker'
+alias vim="nvim"
+
+export PROJECT_DIR="/Users/jacarm/work"
+
+bt () {
+	bazel test //"$1":all
+}
+
+ut () {
+	bazel test //"$1":unit-tests
+}
+
+build-and-run () {
+	pushd ~/work/canva > /dev/null
+	./tools/sde/build.sh backends --include "$@" && ./backends/bin/start.sh --include "$@"
+	popd > /dev/null
+}
+set foldlevel=10
+
+alias tf="/Users/jacarm/work/infrastructure/bin/tf.sh"
