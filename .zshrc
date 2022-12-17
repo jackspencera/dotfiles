@@ -128,8 +128,6 @@ fi
 
 if [ -f ~/.zsh/zsh_env ]; then
   source ~/.zsh/zsh_env
-else
-  print "~/.zsh/zsh_env not found"
 fi
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden'
